@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from './NavBar'
-import Footer from './Footer'
+import Footer from './footer/Footer'
 import {Outlet} from 'react-router-dom'
 
 function RootLayout() {
@@ -9,7 +9,7 @@ function RootLayout() {
         <NavBar/>
         <div style={{minHeight:"100vh"}}>
         <Outlet />
-        <Footer/>
+        {/* <Footer/> */}
         </div>
     </div>
     

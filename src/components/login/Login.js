@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import './Login.css';
+import { useNavigate } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validate that the required fields are not empty
@@ -14,10 +17,25 @@ function Login() {
       return;
     }
 
-    // Perform login logic here
-    // For now, you can just log the values
-    console.log('Username:', username);
-    console.log('Password:', password);
+    const auth = getAuth();
+
+    try {
+      // Perform login using Firebase
+      await signInWithEmailAndPassword(auth, username, password);
+
+      // If login is successful, you can redirect or perform any other actions
+      console.log('Login successful');
+
+      
+
+
+
+      navigate('/home'); // Replace '/dashboard' with the desired redirect path
+    } catch (error) {
+      // Handle login errors
+      console.error('Login error:', error.message);
+      alert('Login failed. Please check your username and password.');
+    }
   };
 
   return (
@@ -27,7 +45,7 @@ function Login() {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username" className="form-label text-white">
-              Username
+              Email
             </label>
             <input
               type="text"

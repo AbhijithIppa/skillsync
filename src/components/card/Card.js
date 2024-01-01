@@ -4,9 +4,33 @@ import { AiFillAccountBook } from "react-icons/ai";
 import { VscHeartFilled } from "react-icons/vsc";
 import { VscAccount } from "react-icons/vsc";
 import { FaHeartCircleCheck } from "react-icons/fa6";
+
+import {app} from "../../firebase/server";
+import {getDatabase,ref,set} from "firebase/database"
+import { Button } from 'react-bootstrap';
+
+
+const db=getDatabase(app);
+
 function Card() {
+  
+  const putData=()=>{
+    set(ref(db,"users/anshu"),{
+      id:1,
+      name:"anshu"
+    })
+  }
   return (
+
+
+
     <div className="card-container">
+
+      <div>
+
+      {/* <Button onClick={putData}>Click Here</Button> */}
+
+      </div>
       <div className="header">
         <p>Followers<FaHeartCircleCheck></FaHeartCircleCheck></p>
         <p>Status</p>
